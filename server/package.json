@@ -1,0 +1,24 @@
+{
+  "name": "shortly-backend",
+  "version": "1.0.0",
+  "description": "shortly: short url made with MERN",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "npx nodemon index.js"
+  },
+  "keywords": [
+    "Next-JS",
+    "Express-JS",
+    "Node-JS",
+    "Mongo-DB"
+  ],
+  "author": "Usama Ahmed",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "nodemon": "^3.0.2"
+  }
+}
