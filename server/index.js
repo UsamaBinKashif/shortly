@@ -19,9 +19,9 @@ const urlRoute = require("./routes/url.router");
 const redirectionRoute = require("./routes/redirect.router");
 
 // Route for the url generation
-app.use("/api/url", urlRoute);
+app.use("/url", urlRoute);
 // Route for the url redirection
-app.use("/api", redirectionRoute);
+app.use("/", redirectionRoute);
 
 // Handling out-of-scope URLs
 app.all("*", (req, res) => {
