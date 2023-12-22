@@ -24,7 +24,7 @@ async function handleGenerateShortURL(req, res) {
   });
 
   // Returning the generated short ID as a response
-  return res.status(200).json({ id: shortID });
+  return res.status(200).json({ url: `https://shrinkly.vercel.app/${shortID}` });
 }
 
 // Exporting the handleGenerateShortURL function
