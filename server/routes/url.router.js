@@ -1,10 +1,13 @@
 const express = require("express");
+const { handleGenerateShortURL } = require("../controllers/url.controller");
 
 const router = express.Router();
 
 /**
- * @POST Generates new short URL and returns the shortend URL in the format example example.com/random-id
+ * @route POST /url
+ * @desc Generates a new short URL
+ * @access Public
  */
-router.route("/").get(getAllContacts).post(addContact);
+router.route("/").post(handleGenerateShortURL);
 
 module.exports = router;
