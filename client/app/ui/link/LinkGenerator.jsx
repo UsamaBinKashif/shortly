@@ -1,4 +1,5 @@
 "use client";
+import clsx from "clsx";
 import { useState } from "react";
 
 const LinkGenerator = () => {
@@ -16,7 +17,7 @@ const LinkGenerator = () => {
     }
   };
   return (
-    <div className="w-[95%] lg:w-[80%] lg:absolute  lg:top-[100%] bg-primary-violet  bg-[url('/assets/bg-boost-desktop.svg')] p-10 lg:p-20 rounded ">
+    <div className="w-[95%] rounded bg-primary-violet  bg-[url('/assets/bg-boost-desktop.svg')] p-10  lg:absolute lg:top-[100%] lg:w-[80%] lg:p-20 ">
       <div className="relative">
         <div className="flex items-center gap-x-2">
           <input
@@ -24,18 +25,23 @@ const LinkGenerator = () => {
             placeholder="Shrink your links here..."
             value={link}
             onChange={(e) => takeInput(e)}
-            className={`py-3 px-4 flex-1 rounded outline-none border placeholder:tracking-[2px] ${
-              error ? "border-red-500" : "border-transparent"
-            } `}
+            className={clsx(
+              "flex-1 rounded border px-4 py-3 outline-none placeholder:tracking-[2px]",
+              error ? "border-red-500" : "border-transparent",
+            )}
           />
           <button
             onClick={generateShortURL}
-            className="py-3 px-4 text-white font-medium bg-primary-cyan hover:bg-opacity-80  border border-transparent rounded tracking-[2px]"
+            className="rounded border border-transparent bg-primary-cyan px-4 py-3  font-medium tracking-[2px] text-white hover:bg-opacity-80"
           >
             Shrink it
           </button>
         </div>
-        {error && <p className="text-red-500 absolute tracking-[2px] mt-1 text-[14px] ">Please add a valid link!</p>}
+        {error && (
+          <p className="absolute mt-1 text-[14px] tracking-[2px] text-red-500 ">
+            Please add a valid link!
+          </p>
+        )}
       </div>
     </div>
   );

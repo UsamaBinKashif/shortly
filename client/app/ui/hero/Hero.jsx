@@ -12,7 +12,7 @@ const Hero = () => {
             Build your brand’s recognition and get detailed insights on how your
             links are performing.
           </p>
-          <div className="items-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
+          {/* <div className="items-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
             <a
               href="javascript:void(0)"
               className="block py-2 px-4 text-center text-white font-medium bg-primary-cyan duration-150 hover:bg-opacity-80  rounded shadow-lg hover:shadow-none"
@@ -20,7 +20,7 @@ const Hero = () => {
             Get started
             </a>
          
-          </div>
+          </div> */}
         </div>
         <div className=" lg:block hidden flex-none lg:mt-14 md:mt-0 md:max-w-xl">
           <img
