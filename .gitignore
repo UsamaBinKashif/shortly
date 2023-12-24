@@ -1,0 +1,29 @@
+# Combined rules from client/.gitignore
+client/node_modules
+client/.pnp
+client.pnp.js
+client/.yarn/install-state.gz
+client/coverage
+client/.next/
+client/out/
+client/build
+client/.DS_Store
+client/*.pem
+client/npm-debug.log*
+client/yarn-debug.log*
+client/yarn-error.log*
+client/.env*.local
+client/.vercel
+client/*.tsbuildinfo
+client/next-env.d.ts
+
+# Combined rules from server/.gitignore
+server/node_modules
+server/npm-debug.log*
+server/yarn-debug.log*
+server/yarn-error.log*
+server/.env*.local
+server/*.env
+
+# Rules from root folder .gitignore
+misc
