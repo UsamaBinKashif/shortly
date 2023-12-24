@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-background-color: hsl(0, 0%, 90%);
+body {
+  background-color: hsl(0, 0%, 90%);
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+ 
+  background: repeating-linear-gradient(-45deg, aqua 0 15px, hsl(257, 27%, 26%) 0 20px)
+    left/200% 100%;
+  animation: l3 3s infinite linear;
+}
+@keyframes l3 {
+  100% {
+    background-position: right;
+  }
 }

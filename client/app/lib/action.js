@@ -1,15 +1,19 @@
 import axios from "axios";
-const getData = () => {
-  axios({
-    method: "get",
-    url: "https://rel-ink.vercel.app/",
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      throw err;
+
+
+
+const getData = async () => {
+  try {
+    const { data } = await axios({
+      url: "https://rel-ink.vercel.app/",
+      method: "GET",
+      secure: true,
     });
+    return data.data;
+  } catch (e) {
+    console.log("error while fetching data", e.message);
+    throw e;
+  }
 };
 
 export { getData };

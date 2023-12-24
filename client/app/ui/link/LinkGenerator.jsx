@@ -5,15 +5,28 @@ import { useState } from "react";
 const LinkGenerator = () => {
   const [link, setLink] = useState("");
   const [error, setError] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const takeInput = (e) => {
-    setLink(e.target.value);
+    const inputValue = e.target.value;
+    setLink(inputValue);
     setError(false);
+    // Regular expression to validate URL format
+    const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+    if (!urlRegex.test(inputValue) && inputValue.trim() !== "") {
+      setError(true); // Set error if input is not a valid URL
+    }
   };
 
   const generateShortURL = () => {
-    if (link === "" || link === null) {
+    if (link === "" || link === null || error === true) {
       setError(true);
+    } else {
+      setLoader(true);
+      setTimeout(() => {
+        setLoader(false);
+        setLink("");
+      }, 2000);
     }
   };
   return (
@@ -28,14 +41,26 @@ const LinkGenerator = () => {
             className={clsx(
               "flex-1 rounded border px-4 py-3 outline-none placeholder:tracking-[2px]",
               error ? "border-red-500" : "border-transparent",
+              loader ? "cursor-not-allowed" : "cursor-text",
             )}
+            disabled={loader}
           />
-          <button
-            onClick={generateShortURL}
-            className="rounded border border-transparent bg-primary-cyan px-4 py-3  font-medium tracking-[2px] text-white hover:bg-opacity-80"
-          >
-            Shrink it
-          </button>
+          {loader ? (
+            <button className="loader w-[116px] cursor-not-allowed rounded border border-transparent bg-primary-cyan px-4 py-3  font-medium tracking-[2px] text-white hover:bg-opacity-80">
+              Shrinking
+            </button>
+          ) : (
+            <button
+              onClick={generateShortURL}
+              disabled={error}
+              className={clsx(
+                "rounded border border-transparent bg-primary-cyan px-4 py-3  font-medium tracking-[2px] text-white hover:bg-opacity-80",
+                error ? "cursor-not-allowed" : "cursor-pointer",
+              )}
+            >
+              Shrink It
+            </button>
+          )}
         </div>
         {error && (
           <p className="absolute mt-1 text-[14px] tracking-[2px] text-red-500 ">

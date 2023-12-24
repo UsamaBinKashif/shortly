@@ -15,7 +15,7 @@ const Header = () => {
       <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
         <div className="flex items-center justify-between py-5 md:block">
           <a
-            href="javascript:void(0)"
+            href="#"
             className="text-[25px] tracking-[2px]  font-bold"
           >
             <h1 className="text-neutral-dark-blue">Shrinkly</h1>
@@ -64,13 +64,13 @@ const Header = () => {
         >
           <div className="flex-1  gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0 font-semibold tracking-[2px]">
             <a
-              href="javascript:void(0)"
+              href="#"
               className="block text-neutral-dark-blue hover:text-opacity-80"
             >
               Log in
             </a>
             <a
-              href="javascript:void(0)"
+              href="#"
               className="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-primary-cyan hover:bg-opacity-80  rounded md:inline-flex"
             >
               Sign in
