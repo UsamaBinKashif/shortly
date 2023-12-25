@@ -16,25 +16,34 @@ const Link = ({ link }) => {
     }
   };
 
-const shrinkedLink = `https://rel-ink.vercel.app/${link.shortId}`
+  const shrinkedLink = `https://rel-ink.vercel.app/${link.shortId}`;
+  const truncatedUrl =
+    link?.redirectUrl?.length > 40
+      ? `${link?.redirectUrl?.slice(0, 40)}...`
+      : link?.redirectUrl;
+ 
 
   return (
-    <div className="flex lg:items-center rounded gap-x-2 bg-white p-4 flex-col lg:flex-row items-start">
+    <div className="flex flex-col items-start gap-x-2 rounded bg-white p-4 lg:flex-row lg:items-center">
       <div className="lg:flex-1">
-        <h3 className="text-primary-violet text-[14px]  lg:text-[16px] tracking-[2px]">
-          {link.redirectUrl}
+        <h3 className="text-[14px] tracking-[2px]  text-primary-violet lg:text-[16px]" title={link?.redirectUrl}>
+          {truncatedUrl}
         </h3>
       </div>
-      <div className="flex gap-x-2 items-start lg:items-center flex-col lg:flex-row gap-y-2 ">
-        <a href={shrinkedLink} target="_blank"  className="text-primary-cyan text-[14px]  lg:text-[16px] tracking-[2px]">
-        {shrinkedLink}
+      <div className="flex flex-col items-start gap-x-2 gap-y-2 lg:flex-row lg:items-center ">
+        <a
+          href={shrinkedLink}
+          target="_blank"
+          className="text-[14px] tracking-[2px]  text-primary-cyan lg:text-[16px]"
+        >
+          {shrinkedLink}
         </a>
         <button
-          onClick={() =>
-            copyLinkToClipboard(shrinkedLink)
-          }
-          className={clsx("p-1 text-[12px] lg:text-[16px] lg:py-2 lg:px-6 w-[120px] text-white font-medium hover:bg-opacity-80  border border-transparent rounded tracking-[2px]", linkCopied ? "bg-primary-violet" : "bg-primary-cyan")}
-          
+          onClick={() => copyLinkToClipboard(shrinkedLink)}
+          className={clsx(
+            "w-[120px] rounded border border-transparent p-1 text-[12px] font-medium tracking-[2px] text-white  hover:bg-opacity-80 lg:px-6 lg:py-2 lg:text-[16px]",
+            linkCopied ? "bg-primary-violet" : "bg-primary-cyan",
+          )}
         >
           {linkCopied ? "Copied!" : "Copy"}
         </button>

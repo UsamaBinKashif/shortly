@@ -6,7 +6,7 @@ const generateLink = async (url) => {
     url: url,
   };
   try {
-    console.log("Request Data:", requestData); // Log to check if 'url' is present in the requestData object
+    
     const { data } = await axios({
       url: `${BASE_URL}/url`,
       method: "POST",

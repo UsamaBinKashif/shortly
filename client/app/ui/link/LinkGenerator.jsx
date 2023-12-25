@@ -1,13 +1,15 @@
 "use client";
 import { generateLink } from "@/app/lib/action";
+import { setData } from "@/app/src/features/url.slice";
 import clsx from "clsx";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const LinkGenerator = () => {
   const [link, setLink] = useState("");
   const [error, setError] = useState(false);
   const [loader, setLoader] = useState(false);
-
+  const dispatch = useDispatch();
   const takeInput = (e) => {
     const inputValue = e.target.value;
     setLink(inputValue);
@@ -23,13 +25,12 @@ const LinkGenerator = () => {
     if (link === "" || link === null || error === true) {
       setError(true);
     } else {
-      console.log(link)
       setLoader(true);
       generateLink(link)
         .then((res) => {
           setLoader(false);
           setLink("");
-          console.log(res);
+          dispatch(setData(res));
         })
         .catch((err) => {
           setLoader(false);
