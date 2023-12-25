@@ -41,14 +41,14 @@ const LinkGenerator = () => {
   return (
     <div className="w-[95%] rounded bg-primary-violet  bg-[url('/assets/bg-boost-desktop.svg')] p-10  lg:absolute lg:top-[100%] lg:w-[80%] lg:p-20 ">
       <div className="relative">
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-start gap-y-2 flex-col lg:items-center lg:flex-row gap-x-2">
           <input
             type="text"
             placeholder="Shrink your links here..."
             value={link}
             onChange={(e) => takeInput(e)}
             className={clsx(
-              "flex-1 rounded border px-4 py-3 outline-none placeholder:tracking-[2px]",
+              "lg:flex-1 rounded border w-full px-4 py-3 outline-none placeholder:tracking-[2px]",
               error ? "border-red-500" : "border-transparent",
               loader ? "cursor-not-allowed" : "cursor-text",
             )}
