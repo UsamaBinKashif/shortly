@@ -5,7 +5,7 @@ import StatisticsCard from "./StatisticsCard";
 const StatisticsSection = () => {
   return (
     <section className="flex flex-col items-center justify-center pb-32 ">
-      <div className="mb-10 flex w-[85%]  flex-col text-center">
+      <div className="mb-10 flex w-[90%] lg:w-[85%]  flex-col lg:text-center">
         <h1 className="title-font mb-4 text-2xl font-medium text-primary-violet lg:text-4xl">
           Advanced Statistics
         </h1>

@@ -22,7 +22,7 @@ const Hero = () => {
          
           </div> */}
         </div>
-        <div className=" lg:block hidden flex-none lg:mt-14 md:mt-0 md:max-w-xl">
+        <div className="  flex-none px-4 lg:px-0 mt-14 md:mt-0 md:max-w-xl">
           <img
             src="/assets/illustration-working.svg"
             

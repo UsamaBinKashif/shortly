@@ -24,9 +24,9 @@ const Link = ({ link }) => {
  
 
   return (
-    <div className="flex flex-col items-start gap-x-2 rounded bg-white p-4 lg:flex-row lg:items-center">
+    <div className="flex flex-col items-start gap-x-2 gap-y-2 lg:gap-y-0 rounded bg-white p-4 lg:flex-row lg:items-center">
       <div className="lg:flex-1">
-        <h3 className="text-[14px] tracking-[2px]  text-primary-violet lg:text-[16px]" title={link?.redirectUrl}>
+        <h3 className="text-[12px] tracking-[2px]  text-primary-violet lg:text-[16px]" title={link?.redirectUrl}>
           {truncatedUrl}
         </h3>
       </div>
@@ -34,7 +34,7 @@ const Link = ({ link }) => {
         <a
           href={shrinkedLink}
           target="_blank"
-          className="text-[14px] tracking-[2px]  text-primary-cyan lg:text-[16px]"
+          className="text-[12px] tracking-[2px]  text-primary-cyan lg:text-[16px]"
         >
           {shrinkedLink}
         </a>
