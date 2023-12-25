@@ -16,20 +16,20 @@ connectToDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Define the CORS options to allow only specific origins
-const allowedOrigins = [process.env.LOCAL_URL, process.env.API_URL];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
+// // Define the CORS options to allow only specific origins
+// const allowedOrigins = [process.env.LOCAL_URL, process.env.API_URL];
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+// };
 
 // Enable CORS only for specified origins
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 
