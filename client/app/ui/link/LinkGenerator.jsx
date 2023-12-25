@@ -1,4 +1,5 @@
 "use client";
+import { generateLink } from "@/app/lib/action";
 import clsx from "clsx";
 import { useState } from "react";
 
@@ -22,11 +23,18 @@ const LinkGenerator = () => {
     if (link === "" || link === null || error === true) {
       setError(true);
     } else {
+      console.log(link)
       setLoader(true);
-      setTimeout(() => {
-        setLoader(false);
-        setLink("");
-      }, 2000);
+      generateLink(link)
+        .then((res) => {
+          setLoader(false);
+          setLink("");
+          console.log(res);
+        })
+        .catch((err) => {
+          setLoader(false);
+          console.error(err);
+        });
     }
   };
   return (

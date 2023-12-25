@@ -8,8 +8,11 @@ body {
 
 /* HTML: <div class="loader"></div> */
 .loader {
- 
-  background: repeating-linear-gradient(-45deg, aqua 0 15px, hsl(257, 27%, 26%) 0 20px)
+  background: repeating-linear-gradient(
+      -45deg,
+      aqua 0 15px,
+      hsl(257, 27%, 26%) 0 20px
+    )
     left/200% 100%;
   animation: l3 3s infinite linear;
 }
@@ -17,4 +20,10 @@ body {
   100% {
     background-position: right;
   }
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+  fill: currentColor;
 }

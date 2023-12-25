@@ -86,6 +86,7 @@ export const dummyLinks = [
   },
 ];
 
+export const BASE_URL = "https://rel-ink.vercel.app";
 export const statistics = [
   {
     title: "Brand Recognition",

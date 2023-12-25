@@ -18,7 +18,7 @@ const Header = () => {
             href="#"
             className="text-[25px] tracking-[2px]  font-bold"
           >
-            <h1 className="text-neutral-dark-blue">Shrinkly</h1>
+            <h1 className="text-neutral-dark-blue">Shrinkly.</h1>
           </a>
           <div className="md:hidden">
             <button
