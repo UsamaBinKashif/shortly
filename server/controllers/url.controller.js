@@ -17,14 +17,14 @@ async function handleGenerateShortURL(req, res) {
   }
 
   // Creating a new entry in the URL model with the generated short ID and provided URL
-  await URL.create({
+  const created_url = await URL.create({
     shortId: shortID,
     redirectUrl: body.url,
     visitHisory: [], // Initializing visit history as an empty array just for now... 
   });
 
   // Returning the generated short ID as a response
-  return res.status(200).json({ url: `https://shrinkly.vercel.app/${shortID}` });
+  return res.status(200).json({ data:created_url  });
 }
 
 // Exporting the handleGenerateShortURL function

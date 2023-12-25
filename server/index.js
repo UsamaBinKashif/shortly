@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
+const cors = require("cors"); // Importing the CORS middleware
 
 // Importing the function to connect to the database
 const connectToDB = require("./config/connectToDB");
@@ -14,6 +15,24 @@ connectToDB();
 // Setting up JSON and body parsers to handle incoming requests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Define the CORS options to allow only specific origins
+const allowedOrigins = [process.env.LOCAL_URL, process.env.API_URL];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+// Enable CORS only for specified origins
+app.use(cors(corsOptions));
+
+
+
 
 const urlRoute = require("./routes/url.router");
 const redirectionRoute = require("./routes/redirect.router");
