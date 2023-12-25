@@ -1,13 +1,13 @@
-import LinkContainer from './LinkContainer'
-import LinkGenerator from './LinkGenerator'
+import LinkContainer from "./LinkContainer";
+import LinkGenerator from "./LinkGenerator";
 
 const LinksSection = () => {
   return (
-    <section className='h-dvh flex flex-col    items-center py-20 '>
-      <LinkGenerator/>
-      <LinkContainer/>
+    <section className="flex lg:h-dvh flex-col items-center py-20 ">
+      <LinkGenerator />
+      <LinkContainer />
     </section>
-  )
-}
+  );
+};
 
-export default LinksSection
+export default LinksSection;
