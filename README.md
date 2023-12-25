@@ -16,6 +16,7 @@
 - ### Front end
 
   - [Next JS](https://nextjs.org/) - React JS Framework for building full stack user interfaces.
+  - [Redux](https://redux.js.org/) - A Predictable State Container for JS Apps.
   - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework for rapidly building modern websites without ever leaving your HTML.
  
 
