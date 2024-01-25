@@ -36,11 +36,13 @@ app.use(cors());
 
 const urlRoute = require("./routes/url.router");
 const redirectionRoute = require("./routes/redirect.router");
-
+const userRoute = require("./routes/user.router")
 // Route for the url generation
 app.use("/url", urlRoute);
 // Route for the url redirection
 app.use("/", redirectionRoute);
+// Route for the user 
+app.use("/user",userRoute );
 
 // Handling out-of-scope URLs
 app.all("*", (req, res) => {
