@@ -1,4 +1,8 @@
 const User = require("../models/user.model");
+const { v4: uuidv4 } = require('uuid');
+const { setUser } = require( '../services/auth.service');
+
+const SESSION_ID = uuidv4()
 
 async function handleUserSignup(req,res){
 const {name,email,password} = req.body
@@ -16,9 +20,12 @@ const user = await User.findOne({
 })
 
 if (!user) {
-  return res.status(404).json({failed:"USER NOT FOUND, WRONG CREDENTIALS!"})
+  return res.status(404).json({success:false})
 }else{
-  return res.status(200).json({success:"SIGNED IN.",
+  setUser(SESSION_ID,user)
+  res.cookie("auth_token",SESSION_ID)
+  return res.status(200).json({success:true,
+  auth_token:SESSION_ID,
   user:user
 }) 
 }
