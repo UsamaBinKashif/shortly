@@ -6,7 +6,6 @@ const generateLink = async (url) => {
     url: url,
   };
   try {
-    
     const { data } = await axios({
       url: `${BASE_URL}/url`,
       method: "POST",
@@ -20,4 +19,24 @@ const generateLink = async (url) => {
   }
 };
 
-export { generateLink };
+const signupuser = async (name, email, password) => {
+  const requestData = {
+    name,
+    email,
+    password,
+  };
+  try {
+    const { data } = await axios({
+      url: `${BASE_URL}/user/signup`,
+      method: "POST",
+      secure: true,
+      data: requestData,
+    });
+    return data;
+  } catch (e) {
+    console.log("error", e);
+    throw e;
+  }
+};
+
+export { generateLink, signupuser };

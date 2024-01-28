@@ -1,7 +1,6 @@
-const { getUser } = require( '../services/auth.service');
+const { getUser } = require('../services/auth.service');
 
 async function protectedAuth (req,res,next) {
-    console.log(req.cookie)
     const auth_token = req.cookie
 
     if (!auth_token) {
