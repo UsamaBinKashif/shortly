@@ -39,4 +39,23 @@ const signupuser = async (name, email, password) => {
   }
 };
 
-export { generateLink, signupuser };
+const signinuser = async (email, password) => {
+  const requestData = {
+    email,
+    password,
+  };
+  try {
+    const { data } = await axios({
+      url: `${BASE_URL}/user/signin`,
+      method: "POST",
+      secure: true,
+      data: requestData,
+    });
+    return data;
+  } catch (e) {
+    console.log("error", e);
+    throw e;
+  }
+};
+
+export { generateLink, signupuser, signinuser };

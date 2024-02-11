@@ -1,13 +1,16 @@
-const createSession = new Map()
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv").config();
 
-function setUser(id,user) {
-    createSession.set(id,user)
-    
+function setUser(id, user) {
+  const payload = {
+    id,
+    ...user,
+  };
+  return jwt.sign(payload, process.env.AUTH_KEY);
 }
 
-function getUser(id) {
-    createSession.get(id)
-    
+function getUser(auth_token) {
+  return jwt.verify(`${auth_token}`, process.env.AUTH_KEY);
 }
 
-module.exports = {setUser,getUser}
+module.exports = { setUser, getUser };

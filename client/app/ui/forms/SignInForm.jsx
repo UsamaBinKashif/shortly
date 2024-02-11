@@ -1,6 +1,35 @@
+"use client"
+import { signinuser } from "@/app/lib/action";
 import Link from "next/link";
+import { useState } from "react";
 
 const SigninForm = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = await signinuser(formData.email, formData.password);
+      setFormData({
+        email: "",
+        password: "",
+      });
+    } catch (error) {
+      throw error;
+    }
+  };
   return (
     <section>
       <header className=" pb-5 md:text-sm">
@@ -18,7 +47,7 @@ const SigninForm = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-neutral-dark-blue md:text-2xl ">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   for="email"
@@ -32,7 +61,9 @@ const SigninForm = () => {
                   id="email"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-neutral-dark-blue outline-none sm:text-sm     "
                   placeholder="name@company.com"
-                  required=""
+                  required
+                  value={formData.email}
+                  onChange={(e) => handleChange(e)}
                 />
               </div>
               <div>
@@ -48,13 +79,15 @@ const SigninForm = () => {
                   id="password"
                   placeholder="••••••••"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-neutral-dark-blue outline-none sm:text-sm     "
-                  required=""
+                  required
+                  value={formData.password}
+                  onChange={(e) => handleChange(e)}
                 />
               </div>
-             
+
               <button
                 type="submit"
-                className="hover:bg-opacity-80   w-full rounded-lg bg-primary-cyan px-5 py-2.5 text-center text-sm font-medium text-white outline-none"
+                className="w-full rounded-lg bg-primary-cyan px-5 py-2.5 text-center text-sm font-medium text-white outline-none hover:bg-opacity-80"
               >
                 Sign in
               </button>

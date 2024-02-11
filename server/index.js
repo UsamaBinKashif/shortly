@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors"); // Importing the CORS middleware
-var cookieParser = require('cookie-parser')
+var cookieParser = require("cookie-parser");
 
 // Importing the function to connect to the database
 const connectToDB = require("./config/connectToDB");
@@ -13,11 +13,11 @@ const app = express();
 connectToDB();
 
 // Middlewares
-const {protectedAuth} = require("./middlewares/auth.middleware")
+const { protectedAuth } = require("./middlewares/auth.middleware");
 // Setting up JSON and body parsers to handle incoming requests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
 // // Define the CORS options to allow only specific origins
 // const allowedOrigins = [process.env.LOCAL_URL, process.env.API_URL];
@@ -34,18 +34,15 @@ app.use(cookieParser())
 // Enable CORS only for specified origins
 app.use(cors());
 
-
-
-
 const urlRoute = require("./routes/url.router");
 const redirectionRoute = require("./routes/redirect.router");
-const userRoute = require("./routes/user.router")
+const userRoute = require("./routes/user.router");
 // Route for the url generation
-app.use("/url",protectedAuth, urlRoute);
+app.use("/url", protectedAuth, urlRoute);
 // Route for the url redirection
 app.use("/", redirectionRoute);
-// Route for the user 
-app.use("/user",userRoute );
+// Route for the user
+app.use("/user", userRoute);
 
 // Handling out-of-scope URLs
 app.all("*", (req, res) => {
