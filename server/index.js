@@ -38,7 +38,7 @@ const urlRoute = require("./routes/url.router");
 const redirectionRoute = require("./routes/redirect.router");
 const userRoute = require("./routes/user.router");
 // Route for the url generation
-app.use("/url", protectedAuth, urlRoute);
+app.use("/url", urlRoute);
 // Route for the url redirection
 app.use("/", redirectionRoute);
 // Route for the user
