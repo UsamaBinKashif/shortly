@@ -36,11 +36,11 @@ async function handleUserSignin(req, res) {
 
     const auth_token = setUser(SESSION_ID, user);
     res.cookie("auth_token", auth_token);
+    console.log(res.cookies);
     return res
       .status(200)
       .json({ success: true, message: "User signed in successfully" });
   } catch (error) {
-    console.error("Error in handleUserSignin:", error);
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });

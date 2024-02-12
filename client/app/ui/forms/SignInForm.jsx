@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { signinuser } from "@/app/lib/action";
 import Link from "next/link";
 import { useState } from "react";
@@ -22,10 +22,11 @@ const SigninForm = () => {
 
     try {
       const data = await signinuser(formData.email, formData.password);
-      setFormData({
-        email: "",
-        password: "",
-      });
+      // setFormData({
+      //   email: "",
+      //   password: "",
+      // });
+      console.log(data)
     } catch (error) {
       throw error;
     }
