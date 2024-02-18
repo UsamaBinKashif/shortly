@@ -1,15 +1,22 @@
 "use client";
 import { signupuser } from "@/app/lib/action";
+import clsx from "clsx";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const SignUpForm = () => {
+  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loader, setLoader] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
   const handleChange = (e) => {
+    setErrorMessage("");
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -19,20 +26,37 @@ const SignUpForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoader(true);
+    if (
+      formData.name === "" ||
+      formData.email === "" ||
+      formData.password === ""
+    ) {
+      setLoader(false);
+      setErrorMessage("Fill out all the fields!");
+      return;
+    }
     try {
       const data = await signupuser(
         formData.name,
         formData.email,
         formData.password,
       );
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-      });
+      if (data.success) {
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+        });
+        setLoader(false);
+        router.replace("/sign-in");
+      } else {
+        setLoader(false);
+        setErrorMessage(data?.message);
+      }
     } catch (error) {
-      throw error;
+      setLoader(false);
+      setErrorMessage(error?.message);
     }
   };
   return (
@@ -89,7 +113,7 @@ const SignUpForm = () => {
                   onChange={(e) => handleChange(e)}
                 />
               </div>
-              <div>
+              <div className="relative">
                 <label
                   htmlFor="password"
                   className="mb-2 block text-sm font-medium text-neutral-dark-blue "
@@ -106,14 +130,29 @@ const SignUpForm = () => {
                   required=""
                   onChange={(e) => handleChange(e)}
                 />
+                {errorMessage && (
+                  <p className="absolute right-[50%]  w-full translate-x-[50%] text-[10px] tracking-[2px] text-red-500 ">
+                    {errorMessage}
+                  </p>
+                )}
               </div>
 
-              <button
-                type="submit"
-                className="d  w-full rounded-lg bg-primary-cyan px-5 py-2.5 text-center text-sm font-medium text-white outline-none hover:bg-opacity-80"
-              >
-                Sign up
-              </button>
+              {loader ? (
+                <button className="loader  cursor-not-allowed rounded border border-transparent bg-primary-cyan px-4 py-3  font-medium tracking-[2px] text-white hover:bg-opacity-80">
+                  Signing up
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={errorMessage}
+                  className={clsx(
+                    "rounded border border-transparent bg-primary-cyan px-4 py-3   font-medium tracking-[2px] text-white hover:bg-opacity-80",
+                    errorMessage ? "cursor-not-allowed" : "cursor-pointer",
+                  )}
+                >
+                  Sign up
+                </button>
+              )}
               <p className="text-sm font-light text-gray-500 ">
                 Don’t have an account yet?{" "}
                 <Link

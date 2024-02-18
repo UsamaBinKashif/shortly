@@ -1,16 +1,23 @@
 "use client";
 import { signinuser } from "@/app/lib/action";
+import clsx from "clsx";
+import Cookies from "js-cookie";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const SigninForm = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loader, setLoader] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setErrorMessage("");
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -19,16 +26,25 @@ const SigninForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoader(true);
     try {
-      const data = await signinuser(formData.email, formData.password);
-      // setFormData({
-      //   email: "",
-      //   password: "",
-      // });
-      console.log(data)
+      const data = await signinuser(formData?.email, formData?.password);
+      if (data?.success) {
+        Cookies.set("user", data?.user);
+        Cookies.set("cookie", data?.cookie);
+        setFormData({
+          email: "",
+          password: "",
+        });
+        setLoader(false);
+        router.replace("/");
+      } else {
+        setErrorMessage(data?.message);
+        setLoader(false);
+      }
     } catch (error) {
-      throw error;
+      setLoader(false);
+      setErrorMessage(error?.message);
     }
   };
   return (
@@ -51,7 +67,7 @@ const SigninForm = () => {
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="mb-2 block text-sm font-medium text-neutral-dark-blue "
                 >
                   Your email
@@ -63,13 +79,13 @@ const SigninForm = () => {
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-neutral-dark-blue outline-none sm:text-sm     "
                   placeholder="name@company.com"
                   required
-                  value={formData.email}
+                  value={formData?.email}
                   onChange={(e) => handleChange(e)}
                 />
               </div>
-              <div>
+              <div className="relative">
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="mb-2 block text-sm font-medium text-neutral-dark-blue "
                 >
                   Password
@@ -81,17 +97,32 @@ const SigninForm = () => {
                   placeholder="••••••••"
                   className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-neutral-dark-blue outline-none sm:text-sm     "
                   required
-                  value={formData.password}
+                  value={formData?.password}
                   onChange={(e) => handleChange(e)}
                 />
+                {errorMessage && (
+                  <p className="absolute right-[50%] mt-1 w-full translate-x-[50%] text-[10px] tracking-[2px] text-red-500 ">
+                    {errorMessage}
+                  </p>
+                )}
               </div>
+              {loader ? (
+                <button className="loader cursor-not-allowed rounded border border-transparent bg-primary-cyan px-4 py-3  font-medium tracking-[2px] text-white hover:bg-opacity-80">
+                  Signing in
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={errorMessage}
+                  className={clsx(
+                    "rounded border border-transparent bg-primary-cyan px-4 py-3  font-medium tracking-[2px] text-white hover:bg-opacity-80",
+                    errorMessage ? "cursor-not-allowed" : "cursor-pointer",
+                  )}
+                >
+                  Sign in
+                </button>
+              )}
 
-              <button
-                type="submit"
-                className="w-full rounded-lg bg-primary-cyan px-5 py-2.5 text-center text-sm font-medium text-white outline-none hover:bg-opacity-80"
-              >
-                Sign in
-              </button>
               <p className="text-sm font-light text-gray-500 ">
                 Don’t have an account yet?{" "}
                 <Link

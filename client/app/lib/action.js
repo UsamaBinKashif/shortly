@@ -53,8 +53,7 @@ const signinuser = async (email, password) => {
     });
     return data;
   } catch (e) {
-    console.log("error", e);
-    throw e;
+    return e.response.data;
   }
 };
 
