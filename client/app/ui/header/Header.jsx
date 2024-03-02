@@ -22,7 +22,7 @@ const Header = () => {
           >
             <h1 className="text-neutral-dark-blue">Shrinkly.</h1>
           </Link>
-          <div className="md:hidden">
+          {/* <div className="md:hidden">
             <button
               className="menu-btn text-gray-500 hover:text-gray-800"
               onClick={() => setState(!state)}
@@ -57,9 +57,9 @@ const Header = () => {
                 </svg>
               )}
             </button>
-          </div>
+          </div> */}
         </div>
-        <div
+        {/* <div
           className={`flex-1 items-center mt-8 md:mt-0 md:flex  ${
             state ? "block  " : " hidden"
           } `}
@@ -90,7 +90,7 @@ const Header = () => {
               </svg>
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   );
